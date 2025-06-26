@@ -1,0 +1,240 @@
+package com.elevate_Internship_Day_3;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// STEP 1: Main class starts here
+public class Main {
+    public static void main(String[] args) {
+        // Step 1.1: Create Scanner and Library objects
+        Scanner sc = new Scanner(System.in);
+        Library library = new Library();
+
+        // Step 1.2: Run the menu in an infinite loop
+        while (true) {
+            // Step 1.3: Display menu
+            System.out.println("\n===== Library Management System =====");
+            System.out.println("1. Add Book");
+            System.out.println("2. Add User");
+            System.out.println("3. View Books");
+            System.out.println("4. View Users");
+            System.out.println("5. Issue Book");
+            System.out.println("6. Return Book");
+            System.out.println("7. Exit");
+            System.out.print("Choose an option: ");
+
+            // Step 1.4: Validate menu input
+            if (!sc.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number between 1 and 7.");
+                sc.nextLine(); // Clear wrong input
+                continue;
+            }
+
+            int choice = sc.nextInt();  // Read user choice
+            sc.nextLine(); // Consume leftover newline
+
+            // Step 1.5: Perform operation based on user choice
+            switch (choice) {
+                case 1:
+                    addBookInput(sc, library);  // Step 2: Add Book
+                    break;
+                case 2:
+                    addUserInput(sc, library);  // Step 3: Add User
+                    break;
+                case 3:
+                    library.viewBooks();        // Step 4: View Books
+                    break;
+                case 4:
+                    library.viewUsers();        // Step 5: View Users
+                    break;
+                case 5:
+                    issueBookInput(sc, library); // Step 6: Issue Book
+                    break;
+                case 6:
+                    returnBookInput(sc, library); // Step 7: Return Book
+                    break;
+                case 7:
+                    // Step 8: Exit program
+                    System.out.println("Thank you for using the Library Management System!");
+                    sc.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Enter a number between 1 and 7.");
+            }
+        }
+    }
+
+    // Step 2: Input method to add a book
+    static void addBookInput(Scanner sc, Library library) {
+        System.out.print("Enter Book ID: ");
+        if (!sc.hasNextInt()) {
+            System.out.println("Invalid Book ID. It must be a number.");
+            sc.nextLine(); return;
+        }
+        int bId = sc.nextInt(); sc.nextLine(); // Read and clear
+
+        System.out.print("Enter Title: ");
+        String title = sc.nextLine().trim();
+        if (title.isEmpty()) {
+            System.out.println("Book title cannot be empty.");
+            return;
+        }
+
+        System.out.print("Enter Author: ");
+        String author = sc.nextLine().trim();
+        if (author.isEmpty()) {
+            System.out.println("Author name cannot be empty.");
+            return;
+        }
+
+        library.addBook(new Book(bId, title, author));  // Call Library method to add book
+    }
+
+    // Step 3: Input method to add a user
+    static void addUserInput(Scanner sc, Library library) {
+        System.out.print("Enter User ID: ");
+        if (!sc.hasNextInt()) {
+            System.out.println("Invalid User ID. It must be a number.");
+            sc.nextLine(); return;
+        }
+        int uId = sc.nextInt(); sc.nextLine(); // Read and clear
+
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("User name cannot be empty.");
+            return;
+        }
+
+        library.addUser(new User(uId, name));  // Call Library method to add user
+    }
+
+    // Step 6: Input method to issue a book
+    static void issueBookInput(Scanner sc, Library library) {
+        System.out.print("Enter Book ID to issue: ");
+        if (!sc.hasNextInt()) {
+            System.out.println("Invalid input. Book ID must be a number.");
+            sc.nextLine(); return;
+        }
+        int bookId = sc.nextInt(); sc.nextLine();
+        library.issueBook(bookId); // Call Library method to issue book
+    }
+
+    // Step 7: Input method to return a book
+    static void returnBookInput(Scanner sc, Library library) {
+        System.out.print("Enter Book ID to return: ");
+        if (!sc.hasNextInt()) {
+            System.out.println("Invalid input. Book ID must be a number.");
+            sc.nextLine(); return;
+        }
+        int bookId = sc.nextInt(); sc.nextLine();
+        library.returnBook(bookId); // Call Library method to return book
+    }
+}
+
+// -------------------- Step 9: Book Class --------------------
+class Book {
+    int bookId;
+    String title;
+    String author;
+    boolean isIssued;
+
+    public Book(int bookId, String title, String author) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.isIssued = false; // Initially not issued
+    }
+
+    public void display() {
+        System.out.println(bookId + " - " + title + " by " + author + " | " +
+                (isIssued ? "Issued" : "Available"));
+    }
+}
+
+// -------------------- Step 10: User Class --------------------
+class User {
+    int userId;
+    String name;
+
+    public User(int userId, String name) {
+        this.userId = userId;
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.println(userId + " - " + name);
+    }
+}
+
+// -------------------- Step 11: Library Class --------------------
+class Library {
+    ArrayList<Book> books = new ArrayList<>();
+    ArrayList<User> users = new ArrayList<>();
+
+    // Step 11.1: Add Book
+    public void addBook(Book b) {
+        books.add(b);
+        System.out.println("Book added.");
+    }
+
+    // Step 11.2: Add User
+    public void addUser(User u) {
+        users.add(u);
+        System.out.println("User added.");
+    }
+
+    // Step 11.3: View all Books
+    public void viewBooks() {
+        if (books.isEmpty()) {
+            System.out.println("No books available.");
+        } else {
+            for (Book b : books) {
+                b.display();
+            }
+        }
+    }
+
+    // Step 11.4: View all Users
+    public void viewUsers() {
+        if (users.isEmpty()) {
+            System.out.println("No users found.");
+        } else {
+            for (User u : users) {
+                u.display();
+            }
+        }
+    }
+
+    // Step 11.5: Issue Book
+    public void issueBook(int bookId) {
+        for (Book b : books) {
+            if (b.bookId == bookId) {
+                if (!b.isIssued) {
+                    b.isIssued = true;
+                    System.out.println("Book issued successfully!");
+                } else {
+                    System.out.println("Book is already issued.");
+                }
+                return;
+            }
+        }
+        System.out.println("Book not found.");
+    }
+
+    // Step 11.6: Return Book
+    public void returnBook(int bookId) {
+        for (Book b : books) {
+            if (b.bookId == bookId) {
+                if (b.isIssued) {
+                    b.isIssued = false;
+                    System.out.println("Book returned successfully!");
+                } else {
+                    System.out.println("Book is not currently issued.");
+                }
+                return;
+            }
+        }
+        System.out.println("Book not found.");
+    }
+}
