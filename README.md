@@ -1,18 +1,18 @@
-#Welcome to Library Management System
+**Welcome to Library Management System**
 
 #Developed by: Tejas Sathe
 #MailId - sathetejas111@gmail.com
 #Pune, Maharashtra
 
-#Project Description:
+**Project Description:**
  The Library Management System is a console-based Java application designed to manage library operations such as adding books, 
  registering users, issuing and returning books, and viewing current library records. The system uses Object-Oriented Programming (OOP) principles like encapsulation,
  abstraction, and modularity to ensure a clean, maintainable, and scalable codebase.
 
 #The core functionality is organized into three primary classes:
--Book – Represents individual books with attributes like ID, title, author, and issue status.
--User – Represents library users with attributes like ID and name.
--Library – Acts as the controller to manage books and users, and handles operations such as adding, viewing, issuing, and returning.
+**1)Book** – Represents individual books with attributes like ID, title, author, and issue status.
+**2)User** – Represents library users with attributes like ID and name.
+**3)Library** – Acts as the controller to manage books and users, and handles operations such as adding, viewing, issuing, and returning.
  
  All user input is handled through a menu-driven interface, with built-in input validation to ensure a smooth and error-free user experience.
 
@@ -25,14 +25,15 @@ To practice **OOP concepts** such as **encapsulation**, **class interaction**, a
 - **IDE:** VS Code / IntelliJ IDEA / Eclipse
 - **Execution:** Terminal / Command Prompt
 
-#Project Structure
+**Project Structure**
+
 com.elevate_Internship_Day_3/
 ├── Main.java // Contains the main menu and handles user input
 ├── Book.java // Book class with ID, title, author, and issued status
 ├── User.java // User class with ID and name
 └── Library.java // Manages books and users, handles operations
 
-#Features
+**Features**
 
 ✅ Add new books  
 ✅ Add new users  
@@ -43,7 +44,7 @@ com.elevate_Internship_Day_3/
 ✅ Input validation (avoids crash on wrong input)  
 
 
-#Sample Flow
+**Sample Flow**
 
 ===== Library Management System =====
 1. Add Book
@@ -59,14 +60,14 @@ Enter Title: Java Basics
 Enter Author: James Gosling
 Book added.
 
-#OOP Concepts Applied
+**OOP Concepts Applied**
 -Concept	Description
 -Encapsulation	Data is grouped logically into Book, User, and Library classes
 -Abstraction	Menu logic is separated from implementation details
 -Modularity	Functions like addBookInput(), issueBookInput() isolate logic
 -Validation	No invalid IDs/names allowed; protects program from crashing
 
-#Future Improvements
+**Future Improvements**
 -Add login system for users
 -Track issue/return history per user
 -Search/filter books by title or author
